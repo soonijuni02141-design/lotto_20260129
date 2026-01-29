@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>로또 번호 추천기</title>
+    <title>하루 위로 문구</title>
     <meta
       name="description"
-      content="1~45 중복 없는 로또 번호 6개를 랜덤으로 추천합니다."
+      content="하루하루 마음을 위로해주는 문구를 건네드립니다. 오늘의 문구는 매일 고정되고, 마음에 드는 문구는 저장할 수 있어요."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,15 +22,17 @@
     <header class="topbar">
       <div class="topbarInner">
         <div class="topbarLeft">
-          <div class="nLogo" aria-hidden="true">N</div>
-          <div class="topbarTitle">로또 추천</div>
+          <div class="nLogo" aria-hidden="true">W</div>
+          <div class="topbarTitle">하루 위로</div>
           <nav class="topbarNav" aria-label="메뉴">
-            <a class="navLink" href="#recommend">추천</a>
-            <a class="navLink" href="#historySection">기록</a>
+            <a class="navLink" href="#today">오늘</a>
+            <a class="navLink" href="#savedSection">저장</a>
           </nav>
         </div>
         <div class="topbarRight">
-          <span class="pill">5세트 · 보너스 포함</span>
+          <button id="btnTheme" class="btn ghost mini" type="button">
+            다크모드
+          </button>
         </div>
       </div>
     </header>
@@ -39,79 +41,68 @@
       <section class="hero">
         <div class="heroInner">
           <div class="heroCopy">
-            <h1 class="heroTitle">오늘 뽑을 번호, 빠르게.</h1>
-            <p class="heroSub">
-              1~45 중복 없는 6개 + 보너스 1개를 <strong>5세트</strong>로 추천합니다.
-            </p>
+            <h1 class="heroTitle">오늘도, 당신 편이에요.</h1>
+            <p class="heroSub">짧지만 따뜻한 문장 하나로, 오늘을 조금 가볍게.</p>
             <div class="heroActions">
-              <button id="btnGenerate" class="btn primary" type="button">
-                번호 추천
+              <button id="btnNew" class="btn primary" type="button">
+                다른 문구 5개 보기
               </button>
-              <button id="btnCopy" class="btn ghost" type="button" disabled>
-                복사
+              <button id="btnCopy" class="btn ghost" type="button">
+                5개 복사
               </button>
-              <button id="btnSave" class="btn ghost" type="button" disabled>
-                기록 저장
+              <button id="btnSave" class="btn ghost" type="button">
+                5개 저장
               </button>
-              <button id="btnClear" class="btn danger ghost" type="button">
-                기록 삭제
+              <button id="btnShare" class="btn ghost" type="button">
+                공유
               </button>
             </div>
           </div>
 
-          <div class="heroPanel" aria-label="추천 옵션">
-            <div class="panelTitle">옵션</div>
-            <div class="row">
-              <div class="field">
-                <label for="seedMode">추천 방식</label>
-                <select id="seedMode" class="select">
-                  <option value="trueRandom" selected>완전 랜덤</option>
-                  <option value="daily">오늘의 추천(매일 고정)</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="sortMode">정렬</label>
-                <select id="sortMode" class="select">
-                  <option value="asc" selected>오름차순</option>
-                  <option value="none">생성 순서 유지</option>
-                </select>
-              </div>
+          <div class="heroPanel" aria-label="오늘의 안내">
+            <div class="panelTitle">오늘의 문구</div>
+            <div class="panelNote">
+              오늘의 문구는 <strong>매일 한 번</strong> 바뀌어요. “다른 문구 보기”는 오늘
+              안에서만 바뀝니다.
             </div>
             <div class="panelNote">
-              세트 수는 <strong>5세트 고정</strong>입니다.
+              마음에 드는 문구는 저장해두고, 나중에 다시 꺼내볼 수 있어요.
             </div>
           </div>
         </div>
         <div class="heroFade" aria-hidden="true"></div>
       </section>
 
-      <section id="recommend" class="rail" aria-label="추천 결과">
+      <section id="today" class="rail" aria-label="오늘의 문구">
         <div class="railHeader">
-          <h2 class="railTitle">추천 결과</h2>
-          <div class="railHint">메인 6개 + 보너스 1개 (중복 없음)</div>
+          <h2 class="railTitle">오늘의 문구</h2>
+          <div id="todayMeta" class="railHint"></div>
         </div>
-        <div id="result" class="result" role="status" aria-live="polite">
-          <div class="placeholder">
-            아직 추천된 번호가 없어요. 상단의 <strong>번호 추천</strong>을 눌러주세요.
-          </div>
-        </div>
+        <article id="quoteCard" class="quoteCard" aria-live="polite">
+          <div id="quoteWhen" class="quoteWhen"></div>
+          <div id="quoteList" class="quoteList"></div>
+        </article>
         <p id="toast" class="toast" role="status" aria-live="polite"></p>
       </section>
 
-      <section id="historySection" class="rail" aria-label="저장된 기록">
+      <section id="savedSection" class="rail" aria-label="저장한 문구">
         <div class="railHeader">
-          <h2 class="railTitle">저장된 기록</h2>
-          <div class="railHint">로컬 저장소(LocalStorage)에 저장됩니다.</div>
+          <h2 class="railTitle">저장한 문구</h2>
+          <div class="railHint">이 브라우저에만 저장됩니다.</div>
         </div>
-        <div id="history" class="history empty">
-          <div class="historyEmpty">저장된 기록이 없습니다.</div>
+        <div class="savedActions">
+          <button id="btnClearSaved" class="btn danger ghost mini" type="button">
+            저장 전체 삭제
+          </button>
+        </div>
+        <div id="savedList" class="history empty">
+          <div class="historyEmpty">저장된 문구가 없습니다.</div>
         </div>
       </section>
 
       <footer class="footer">
         <p>
-          주의: 당첨을 보장하지 않습니다. 재미로 사용해주세요.
+          힘들 땐, 오늘 하루만 잘 버텨도 충분해요.
         </p>
       </footer>
     </main>

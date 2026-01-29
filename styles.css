@@ -19,6 +19,17 @@
   --focus: rgba(214, 183, 122, 0.38);
 }
 
+[data-theme="light"] {
+  --bg: #eefaf1;
+  --bg2: #fbfefc;
+  --border: rgba(17, 17, 17, 0.14);
+  --text: rgba(10, 10, 10, 0.92);
+  --muted: rgba(10, 10, 10, 0.68);
+  --muted2: rgba(10, 10, 10, 0.54);
+  --shadow: 0 20px 70px rgba(0, 0, 0, 0.14);
+  --focus: rgba(61, 220, 151, 0.22);
+}
+
 *,
 *::before,
 *::after {
@@ -36,8 +47,8 @@ body {
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(1100px 560px at 30% -8%, rgba(234, 223, 205, 0.18), transparent 62%),
-    radial-gradient(900px 520px at 80% 12%, rgba(214, 183, 122, 0.12), transparent 60%),
+    radial-gradient(1100px 560px at 30% -8%, rgba(61, 220, 151, 0.16), transparent 62%),
+    radial-gradient(900px 520px at 80% 12%, rgba(174, 241, 211, 0.12), transparent 60%),
     radial-gradient(900px 520px at 48% 30%, rgba(255, 255, 255, 0.05), transparent 60%),
     linear-gradient(180deg, var(--bg), var(--bg2));
 }
@@ -46,8 +57,8 @@ body {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(980px 640px at 30% 12%, rgba(205, 189, 169, 0.17), transparent 64%),
-    radial-gradient(1200px 720px at 78% 18%, rgba(214, 183, 122, 0.10), transparent 60%),
+    radial-gradient(980px 640px at 30% 12%, rgba(174, 241, 211, 0.14), transparent 64%),
+    radial-gradient(1200px 720px at 78% 18%, rgba(61, 220, 151, 0.10), transparent 60%),
     radial-gradient(900px 600px at 55% 55%, rgba(255, 255, 255, 0.04), transparent 62%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.42));
   pointer-events: none;
@@ -62,6 +73,11 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .topbar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.55));
+  border-bottom: 1px solid rgba(17, 17, 17, 0.10);
 }
 
 .topbarInner {
@@ -116,6 +132,14 @@ body {
 .navLink:hover {
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .navLink {
+  color: rgba(10, 10, 10, 0.72);
+}
+[data-theme="light"] .navLink:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(10, 10, 10, 0.92);
 }
 
 .pill {
@@ -197,6 +221,11 @@ body {
   padding: 14px;
 }
 
+[data-theme="light"] .heroPanel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(17, 17, 17, 0.12);
+}
+
 .panelTitle {
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -261,6 +290,17 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+[data-theme="light"] .btn {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text);
+}
+
+[data-theme="light"] .btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.16);
+}
+
 .btn:active {
   transform: translateY(1px);
 }
@@ -311,6 +351,15 @@ body {
   background: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme="light"] .btn.ghost {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .rail {
   margin-top: 18px;
 }
@@ -334,19 +383,119 @@ body {
   font-size: 12px;
 }
 
-.result {
+.quoteCard {
   margin-top: 14px;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 18px;
   background: rgba(10, 8, 7, 0.26);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  min-height: 88px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.26);
 }
 
-.placeholder {
+[data-theme="light"] .quoteCard {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.08);
+}
+
+.quoteText {
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  font-weight: 750;
+  white-space: pre-wrap;
+}
+
+.quoteWhen {
+  font-size: 12px;
+  color: var(--muted2);
+  margin-bottom: 10px;
+}
+
+.quoteList {
+  display: grid;
+  gap: 10px;
+}
+
+.quoteItem {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="light"] .quoteItem {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.quoteItemTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.quoteItemActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quoteItemText {
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  white-space: pre-wrap;
+}
+
+.quoteItemMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 13px;
+}
+
+.quoteSub {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quoteTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(214, 183, 122, 0.12);
+  border: 1px solid rgba(214, 183, 122, 0.30);
+  color: var(--text);
+  font-weight: 700;
+}
+
+[data-theme="light"] .quoteTag {
+  background: rgba(46, 124, 246, 0.10);
+  border: 1px solid rgba(46, 124, 246, 0.22);
+}
+
+.dot {
+  opacity: 0.65;
+}
+
+.savedActions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 2px 10px;
 }
 
 .sets {
